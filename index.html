@@ -4,21 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bruno Lombardi DEV</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Tarefas</title>
     <meta property="og:site_name" content="Portfólio de Programador" />
-    <meta property="og:title" content="Minha Lista de Tarefas" />
+    <meta property="og:title" content="Bruno Lombardi DEV" />
     <meta property="og:type" content="portfolio" />
-    <meta property="og:description"
-      content="Criei a minha versão de uma To Do List, inicialmente simplificada, mas que em breve será melhorada e incrementada." />
+    <meta property="og:description" content="Meu Portfólio de Programador." />
     <meta property="og:url" content="https://brunolombardi.dev.br" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image"
-      content="https://brunolombardidev.github.io/minha-lista-de-tarefas/assets/img/thumbnail-1200x630px.png" />
+      content="https://brunolombardi.dev.br/img/thumbnail-1200x630px.png" />
     <meta name="twitter:image"
-      content="https://brunolombardidev.github.io/minha-lista-de-tarefas/assets/img/thumbnail-1200x630px.png">
+      content="https://brunolombardi.dev.br/img/thumbnail-1200x630px.png">
 
     <link rel="stylesheet" href="./src/styleReset.css">
     <link rel="stylesheet" href="./src/style.css">
@@ -200,19 +196,22 @@
     <div class="container contato">
       <h3>Contato</h3>
       <div class="caixa central">
-        <form  method="post" action="./src/form.php" id="mailDev">
+        <?php if (!empty($status)) { ?>
+          <p><?php echo $status; ?></p>
+        <?php } ?>
+        <form action="./src/form.php" method="post" id="mailDev">
           <div class="emLinha">
             <div class="emColuna">
-              <input class="campo" type="text" id="name" placeholder="*Seu Nome">
-              <input class="campo" type="text" id="email" placeholder="*E-mail de Retorno">
-              <input class="campo" type="text" id="telphone" placeholder="Telefone / Whatsapp">
-              <label class="textoCurto" id="whats"><input type="checkbox" id="whats"> Este número é o meu whatsapp.</label>
+              <input class="campo" type="text" id="nome" name="nome" placeholder="*Seu Nome" required>
+              <input class="campo" type="text" id="email" name="email" placeholder="*E-mail de Retorno" required>
+              <input class="campo" type="text" id="telefone" name="telefone" placeholder="*Telefone/Whatsapp" required>
+              <label class="textoCurto" id="whats"><input type="checkbox" id="whatsapp" name="whatsapp" value="Sim"> Este número é o meu whatsapp.</label>
             </div>
             <div class="emColuna">
-              <textarea id="message" placeholder="*Mensagem curta"></textarea>
+              <textarea id="mensagem" name="mensagem" placeholder="*Mensagem curta" required></textarea>
             </div>
           </div>
-          <button class="botao mouseClick" type="submit" value="Submit">Enviar E-mail</button>
+          <input class="botao mouseClick" type="submit" name="submit" value="Enviar E-mail">
         </form>
       </div>
       <div class="emLinha">

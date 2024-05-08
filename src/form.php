@@ -1,46 +1,45 @@
 <?php
+// Definindo uma variável para armazenar a mensagem de status do envio
+$status = "";
 
-$errors = [];
-$errorMessage = '';
-
-if (!empty($_POST)) {
-   $name = $_POST['name'];
-   $email = $_POST['email'];
-   $message = $_POST['message'];
-
-   if (empty($name)) {
-       $errors[] = 'Name is empty';
-   }
-
-   if (empty($email)) {
-       $errors[] = 'Email is empty';
-   } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-       $errors[] = 'Email is invalid';
-   }
-
-   if (empty($message)) {
-       $errors[] = 'Message is empty';
-   }
-
-   if (empty($errors)) {
-       $toEmail = 'example@example.com';
-       $emailSubject = 'New email from your contact form';
-       $headers = ['From' => $email, 'Reply-To' => $email, 'Content-type' => 'text/html; charset=utf-8'];
-       $bodyParagraphs = ["Name: {$name}", "Email: {$email}", "Message:", $message];
-       $body = join(PHP_EOL, $bodyParagraphs);
-
-       if (mail($toEmail, $emailSubject, $body, $headers)) {
-
-           header('Location: thank-you.html');
-       } else {
-           $errorMessage = 'Oops, something went wrong. Please try again later';
-       }
-
-   } else {
-
-       $allErrors = join('<br/>', $errors);
-       $errorMessage = "<p style='color: red;'>{$allErrors}</p>";
-   }
+// Verifica se o formulário foi submetido
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recupera os valores dos campos do formulário
+    $nome = $_POST['nome'];
+    $email = $_POST['email'];
+    $telefone = $_POST['telefone'];
+    $whatsapp = isset($_POST['whatsapp']) ? $_POST['whatsapp'] : 'Não';
+    $mensagem = $_POST['mensagem'];
+    
+    // Validação dos campos (opcional)
+    if (empty($nome) || empty($email) || empty($mensagem)) {
+        $status = "Por favor, preencha todos os campos obrigatórios.";
+    } else {
+        // Destinatário do e-mail
+        $destinatario = "email@brunolombardi.dev.br";
+        
+        // Assunto do e-mail
+        $assunto = "Novo contato de $nome";
+        
+        // Conteúdo do e-mail
+        $conteudo = "Nome: $nome\n";
+        $conteudo .= "E-mail: $email\n";
+        $conteudo .= "Telefone: $telefone\n";
+        $conteudo .= "WhatsApp: $whatsapp\n";
+        $conteudo .= "Mensagem:\n$mensagem\n";
+        
+        // Cabeçalhos do e-mail
+        $headers = "From: $nome <$email>";
+        
+        // Envia o e-mail
+        if (mail($destinatario, $assunto, $conteudo, $headers)) {
+            $status = "E-mail enviado com sucesso!";
+            // Redireciona de volta para a página anterior (index.html)
+            header("Location: ../index.html");
+            exit(); // Termina o script para evitar qualquer saída adicional
+        } else {
+            $status = "Erro ao enviar o e-mail. Por favor, tente novamente mais tarde.";
+        }
+    }
 }
-
 ?>
