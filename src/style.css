@@ -15,6 +15,12 @@ body {
     --color-red2: rgb(122, 0, 0);
 }
 
+.desenvolvedor {
+    margin-bottom: 20px;
+    color: var(--color-grey3);
+    font-size: 12px;
+}
+
 /* Barra de Rolagem */
 
 ::-webkit-scrollbar {
@@ -41,6 +47,7 @@ body {
 
 a :hover {
     color: var(--color-red1);
+    transition: 0.5s;
 }
 
 .mouseClick {
@@ -107,7 +114,8 @@ ul li {
 }
 
 .print {
-    border-radius: 10px;
+    height: 140px;
+    border-radius: 5px;
 }
 
 /* Textos */
@@ -245,37 +253,7 @@ textarea {
     text-align: center;
 }
 
-#Sobre {
-    margin: 0px;
-    padding-top: 30px;
-    vertical-align: bottom;
-}
-
-#Experiencia {
-    margin: 0px;
-    padding-top: 30px;
-    vertical-align: bottom;
-}
-
-#Habilidades {
-    margin: 0px;
-    padding-top: 30px;
-    vertical-align: bottom;
-}
-
-#Projetos {
-    margin: 0px;
-    padding-top: 30px;
-    vertical-align: bottom;
-}
-
-#Objetivo {
-    margin: 0px;
-    padding-top: 30px;
-    vertical-align: bottom;
-}
-
-#Contato {
+#Sobre, #Experiencia, #Habilidades, #Projetos, #Objetivo, #Contato {
     margin: 0px;
     padding-top: 30px;
     vertical-align: bottom;
@@ -291,6 +269,7 @@ textarea {
 
 .emColuna {
     margin: 0px 10px;
+    display: block;
 }
 
 .linhaFlexivel {
@@ -300,6 +279,7 @@ textarea {
 .caixa {
     margin: 0px 15px;
     padding: 20px;
+    min-width: 260px;
     border-radius: 15px;
     background-image: linear-gradient(to bottom right, var(--color-grey2), var(--color-grey1));
     box-shadow: 0px 0px 30px var(--color-black1);
@@ -314,7 +294,52 @@ textarea {
 .central {
     margin: 0px auto;
     max-width: 500px;
+    width: 70%;
+    min-width: 260px;
     text-align: center;
+}
+
+/* Limitar Expandir Conteúdo */
+
+.conteudoLimite {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+    transition: height 0.5s ease;
+    height: 63px;
+    position: relative;
+}
+
+.conteudoLimite.expanded {
+   height: 150px;
+}
+
+.conteudoExtra {
+    margin: 0px;
+    padding: 5px;
+    width: 100%;
+    border-radius: 5px;
+    background-image: linear-gradient(to bottom right, var(--color-grey2), var(--color-grey1));
+    color: var(--color-grey2);
+    font-size: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    display: block;
+    cursor: pointer;
+}
+
+.conteudoExtra:hover {
+    color: var(--color-grey3);
+}
+
+.conteudoExtra::before {
+    content: "Expandir Conteúdo";
+}
+
+.conteudoLimite.expanded .conteudoExtra::before {
+    content: "Recolher...";
 }
 
 /* Novo Menu */
@@ -374,6 +399,7 @@ textarea {
         top: 45px;
         left: 0;
         width: 100%;
+        height: 300px;
         background-color: var(--color-black1);
     }
 
@@ -399,5 +425,11 @@ textarea {
     .navbar-nav.active {
         display: flex;
         flex-direction: column;
+    }
+
+    .contato .emLinha {
+        margin: 0px auto;
+        flex-direction: column;
+        align-items: center;
     }
 }

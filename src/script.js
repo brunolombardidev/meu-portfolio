@@ -32,3 +32,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+
+// Expandir Conteúdo
+
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".conteudoExtra");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", function() {
+            const container = this.parentElement;
+            container.classList.toggle("expanded");
+        });
+    });
+});
